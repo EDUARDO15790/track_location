@@ -1,0 +1,20 @@
+import googlemaps
+
+# Inicializar la API de Google Maps
+gmaps = googlemaps.Client(key='TU_CLAVE_API')
+
+# Función para obtener la ubicación a partir de un número de teléfono
+def get_location(phone_number):
+    # Intenta convertir el número de teléfono en coordenadas geográficas
+    geocode_result = gmaps.reverse_geocode((phone_number.latitude, phone_number.longitude))
+
+    # Devuelve la dirección más precisa si se encuentra
+    if geocode_result:
+        return geocode_result[0]['formatted_address']
+    else:
+        return 'No se encontró la ubicación'
+
+# Ejemplo de uso
+phone_number = {'latitude': 37.7749, 'longitude': -122.4194}
+location = get_location(phone_number)
+print(location)
